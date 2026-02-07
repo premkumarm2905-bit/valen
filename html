@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine?</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ff9a9e, #fecfef, #ffecd2);
+            color: #333;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            animation: fadeIn 2s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        .header-image {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+        }
+        h1 {
+            font-size: 2.5em;
+            color: #e91e63;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+        .images {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .images img {
+            width: 100%;
+            height: 150px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        #yesBtn {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            transform: scale(1);
+        }
+        #noBtn {
+            background: linear-gradient(45deg, #a8a8a8, #6c757d);
+            color: white;
+        }
+        button:hover {
+            transform: scale(1.05);
+        }
+        .hearts {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .heart {
+            position: absolute;
+            color: #ff6b6b;
+            font-size: 2em;
+            animation: float 6s linear infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+        .message {
+            display: none;
+            font-size: 1.5em;
+            color: #4caf50;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="purposing scene.png" alt="Valentine's Day Couple" class="header-image">
+        <h1>💖 Will you be my friend? 💖</h1>
+        <p>Will you be my friend in this Valentine ? I've been thinking about you a lot, and I can't imagine a better way to spend Valentine's Day than with you. What do you say?</p>
+        <div class="images">
+            <!-- Lovely Valentine's Day Pictures of Proposing -->
+            <img src="hinata naruto.jpg" alt="Romantic Proposal">
+            <img src="purposing 2.jpg" alt="Proposal with Roses">
+            <img src="purposing scene.png" alt="Candlelit Proposal">
+        </div>
+        <div class="buttons">
+            <button id="yesBtn">Yes! 😍</button>
+            <button id="noBtn">No 😔</button>
+        </div>
+        <div class="message" id="message"></div>
+    </div>
+
+    <script>
+        let noClicks = 0;
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+        const message = document.getElementById('message');
+        const heartsContainer = document.getElementById('heartsContainer');
+
+        // Function to create floating hearts
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDelay = Math.random() * 6 + 's';
+            heartsContainer.appendChild(heart);
+            setTimeout(() => heart.remove(), 6000);
+        }
+
+        // Create hearts every 500ms
+        setInterval(createHeart, 500);
+
+        // Handle No button click
+        noBtn.addEventListener('click', () => {
+            noClicks++;
+            // Make Yes button bigger
+            const scale = 1 + (noClicks * 0.2); // Increases by 20% each time
+            yesBtn.style.transform = `scale(${scale})`;
+            yesBtn.style.fontSize = `${1.2 + (noClicks * 0.1)}em`; // Also increase font size
+
+            if (noClicks >= 5) {
+                // Remove No button after 5 clicks
+                noBtn.style.display = 'none';
+                message.textContent = "Come on, say yes! 💕Become my friend!";
+                message.style.display = 'block';
+            }
+        });
+
+        // Handle Yes button click
+        yesBtn.addEventListener('click', () => {
+            message.textContent = "Yay! Happy Valentine's Day! Will you be my friend! 🎉❤️";
+            message.style.display = 'block';
+            // Hide buttons
+            yesBtn.style.display = 'none';
+            noBtn.style.display = 'none';
+        });
+    </script>
+</body>
+</html>
